@@ -1,0 +1,34 @@
+Config { font = "xft:raleway:pixelsize=16:bold:antialias=true:hinting=true"
+       , additionalFonts = []
+       , borderColor = "#282c34"
+       , border = TopB
+       , bgColor = "#282c34"
+       , fgColor = "#ABB2BF"
+       , alpha = 255
+       , position = TopSize L 100 24
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = False
+       , overrideRedirect = False 
+       , textOutputFormat = Ansi
+       , commands = [ Run Weather "EGPF" ["-t","<tempF> F ",
+                                          "-L","65","-H","85",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Cpu ["-H","80","--high","#e06c75"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %b %d %Y <fc=#61afef>%I:%M %p</fc>" "date" 10
+                    , Run XMonadLog
+                    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 20 
+		]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{ %cpu% | %memory% | <fc=#e5c07b>%date%</fc> |%trayerpad%"
+       }
