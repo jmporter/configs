@@ -1,0 +1,33 @@
+Config { font = "xft:raleway:pixelsize=14:bold:antialias=true:hinting=true"
+       , additionalFonts = []
+       , borderColor = "#282c34"
+       , border = TopB
+       , bgColor = "#282c34"
+       , fgColor = "#ABB2BF"
+       , alpha = 255
+       , position = TopSize L 100 22
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = False
+       , overrideRedirect = False 
+       , textOutputFormat = Ansi
+       , commands = [ Run Cpu ["-H","80","--high","#e06c75"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Date "%a %b %d %Y <fc=#61afef>%I:%M %p</fc>" "date" 10
+                    , Run XMonadLog
+		    , Run Battery ["-t", "<acstatus>: <left>%",
+				   "--",
+				   "-O", "Charging",
+				   "-i", "AC",
+				   "-o", "Bat"
+				   ] 10
+                    , Run Com "/home/jared/.config/xmobar/trayer-padding-icon.sh" [] "pad" 10 
+		]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%XMonadLog% }{%battery% | %cpu% | %memory% | <fc=#e5c07b>%date%</fc> |%pad%"}
